@@ -67,8 +67,8 @@ These instructions will walk you through the process of setting up this project 
 6.  Create a `.env` file and set the `PROJECT_NAME` variable to the name of the project root directory.
 
     ```shell
-    cp .env{.dist,} && \
-    echo "PROJECT_NAME=${PWD##*/}" >> .env
+    echo "PROJECT_NAME=${PWD##*/}" >> .env.dist && \
+    cp .env{.dist,}
     ```
 
 7.  We're now ready to spin it all up.
