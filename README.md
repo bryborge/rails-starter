@@ -23,8 +23,8 @@ These instructions will walk you through the process of setting up this project 
 
     ```shell
     git clone --depth=1 git@github.com:sonofborge/rails-starter.git <my-project> && \
-    cd <my-project> && \
-    rm -rf !$/.git && \
+    cd $_ && \
+    rm -rf .git && \
     git init
     ```
 
@@ -63,10 +63,11 @@ These instructions will walk you through the process of setting up this project 
     mv database.yml config/database.yml
     ```
 
-6.  Create a `.env` file.
+6.  Create a `.env` file and set the `PROJECT_NAME` variable to the name of the project root directory.
 
     ```shell
-    cp .env{.dist,}
+    cp .env{.dist,} && \
+    echo "PROJECT_NAME=${PWD##*/}" >> .env
     ```
 
 7.  We're now ready to spin it all up.
@@ -75,7 +76,7 @@ These instructions will walk you through the process of setting up this project 
     docker-compose up -d
     ```
 
-8.  In a browser, navigate to `localhost:<PORT>`, where `<PORT>` si the port number specified in your `.env` file.
+8.  In a browser, navigate to `localhost:<PORT>`, where `<PORT>` is the port number specified in your `.env` file.
 
 ## License
 
