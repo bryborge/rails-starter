@@ -1,6 +1,6 @@
 # Rails Starter
 
-Quickly get a Dockerized Ruby on Rails application spun up for development!
+A Dockerized Ruby on Rails application boilerplate for local development!
 
 ## Built With
 
