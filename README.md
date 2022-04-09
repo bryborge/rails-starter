@@ -14,6 +14,7 @@ These instructions will walk you through the process of setting up this project 
 ### Prerequisites
 
 *   Docker
+*   Docker Compose
 *   Git
 
 ### Installing
