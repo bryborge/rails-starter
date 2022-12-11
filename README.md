@@ -1,6 +1,6 @@
 # Rails Starter
 
-A Dockerized Ruby on Rails application boilerplate for local development!
+A Dockerized Ruby on Rails application boilerplate for development and production.
 
 ## Built With
 
@@ -22,7 +22,7 @@ These instructions will walk you through the process of setting up this project 
 1.  Clone the project (replacing `<my-project>` with the desired project name), delete `.git` directory, and
     reinitialize git.
 
-    ```shell
+    ```sh
     git clone --depth=1 git@github.com:sonofborge/rails-starter.git <my-project> && \
     cd $_ && \
     rm -rf .git && \
@@ -30,15 +30,15 @@ These instructions will walk you through the process of setting up this project 
     ```
 
 2.  Drop into a shell on a temporary docker container based on the Ruby image version specified in
-    `docker/dev/Dockerfile`.
+    `docker/Dockerfile`.
 
-    ```shell
-    docker run --rm -v ${PWD}:/var/app/current -w /var/app/current -it ruby:<version> /bin/bash
+    ```sh
+    docker run --rm -v ${PWD}:/app -w /app -it ruby:<version> /bin/bash
     ```
 
 3.  From within the container, install rails.
 
-    ```shell
+    ```sh
     gem install rails
     ```
 
@@ -47,33 +47,33 @@ These instructions will walk you through the process of setting up this project 
 
     For example:
 
-    ```shell
-    rails new . --database=postgresql --webpack=react --skip-test --api
+    ```sh
+    rails new . --database=postgresql --css=tailwind --skip-test
     ```
 
     Once this completes, you can exit the container.
 
-    ```shell
+    ```sh
     exit
     ```
 
 5.  Move the `database.yml` file at the root of the project into the `config/` directory, replacing the one
     rails generated for us.
 
-    ```shell
+    ```sh
     mv database.yml config/database.yml
     ```
 
 6.  Create a `.env` file and set the `PROJECT_NAME` variable to the name of the project root directory.
 
-    ```shell
+    ```sh
     echo "PROJECT_NAME=${PWD##*/}" >> .env.dist && \
     cp .env{.dist,}
     ```
 
 7.  We're now ready to spin it all up.
 
-    ```shell
+    ```sh
     docker-compose up -d
     ```
 
@@ -81,4 +81,4 @@ These instructions will walk you through the process of setting up this project 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
