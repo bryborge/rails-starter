@@ -4,11 +4,10 @@ services:
   web:
     build:
       context: .
-      dockerfile: docker/dev/Dockerfile
+      dockerfile: docker/Dockerfile
     container_name: ${PROJECT_NAME}_web
     depends_on:
       - db
-    entrypoint: [ "sh", "./docker/startup.sh" ]
     env_file: .env
     environment:
       DB_HOST: db
@@ -20,13 +19,10 @@ services:
       - db
     platform: linux/amd64
     ports:
-      - target: ${PORT}
-        published: 3000
-        protocol: tcp
-        mode: host
+      - "80:80"
     restart: unless-stopped
     volumes:
-      - .:/var/app/current
+      - .:/app
 
   db:
     container_name: ${PROJECT_NAME}_db
