@@ -48,7 +48,7 @@ These instructions will walk you through the process of setting up this project 
     For example:
 
     ```sh
-    rails new . --database=postgresql --css=tailwind --skip-test
+    rails new . --database=postgresql --css=tailwind --skip-test --skip-puma
     ```
 
     Once this completes, you can exit the container.
