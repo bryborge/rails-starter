@@ -23,10 +23,9 @@ These instructions will walk you through the process of setting up this project 
     reinitialize git.
 
     ```sh
-    git clone --depth=1 git@github.com:sonofborge/rails-starter.git <my-project> && \
-    cd $_ && \
-    rm -rf .git && \
-    git init
+    git clone --depth=1 git@github.com:sonofborge/rails-starter.git <my-project> \
+    && cd $_ \
+    && rm -rf .git
     ```
 
 2.  Drop into a shell on a temporary docker container based on the Ruby image version specified in
@@ -51,33 +50,33 @@ These instructions will walk you through the process of setting up this project 
     rails new . --database=postgresql --css=tailwind --skip-test --skip-puma
     ```
 
-    Once this completes, you can exit the container.
+    When prompted to overwrite files, select `a` to continue. Once this completes, you can exit the container.
 
     ```sh
     exit
     ```
 
-5.  Move the `database.yml` file at the root of the project into the `config/` directory, replacing the one
+1.  Move the `database.yml` file at the root of the project into the `config/` directory, replacing the one
     rails generated for us.
 
     ```sh
     mv database.yml config/database.yml
     ```
 
-6.  Create a `.env` file and set the `PROJECT_NAME` variable to the name of the project root directory.
+2.  Create a `.env` file and set the `PROJECT_NAME` variable to the name of the project root directory.
 
     ```sh
-    echo "PROJECT_NAME=${PWD##*/}" >> .env.dist && \
-    cp .env{.dist,}
+    echo "PROJECT_NAME=${PWD##*/}" >> .env.dist \
+    && cp .env{.dist,}
     ```
 
-7.  We're now ready to spin it all up.
+3.  We're now ready to spin it all up.
 
     ```sh
     docker compose up -d
     ```
 
-8.  In a browser, navigate to `localhost:<PORT>`, where `<PORT>` is the port number specified in your `.env` file.
+4.  In a browser, navigate to `localhost:<PORT>`, where `<PORT>` is the port number specified in your `.env` file.
 
 ## License
 
