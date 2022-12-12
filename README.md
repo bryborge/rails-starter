@@ -47,7 +47,7 @@ These instructions will walk you through the process of setting up this project 
     For example:
 
     ```sh
-    rails new . --database=postgresql --css=tailwind --skip-test --skip-puma
+    rails new . --database=postgresql --skip-test --skip-puma
     ```
 
     When prompted to overwrite files, select `a` to continue. Once this completes, you can exit the container.
@@ -56,27 +56,19 @@ These instructions will walk you through the process of setting up this project 
     exit
     ```
 
-1.  Move the `database.yml` file at the root of the project into the `config/` directory, replacing the one
-    rails generated for us.
+5.  Create a `.env` file and set the `PROJECT_NAME` variable to the name of the project root directory.
 
     ```sh
-    mv database.yml config/database.yml
+    echo "PROJECT_NAME=${PWD##*/}" >> .env.dist && cp .env{.dist,}
     ```
 
-2.  Create a `.env` file and set the `PROJECT_NAME` variable to the name of the project root directory.
-
-    ```sh
-    echo "PROJECT_NAME=${PWD##*/}" >> .env.dist \
-    && cp .env{.dist,}
-    ```
-
-3.  We're now ready to spin it all up.
+6.  We're now ready to spin it all up.
 
     ```sh
     docker compose up -d
     ```
 
-4.  In a browser, navigate to `localhost:<PORT>`, where `<PORT>` is the port number specified in your `.env` file.
+7.  In a browser, navigate to `localhost:<PORT>`, where `<PORT>` is the port number specified in your `.env` file.
 
 ## License
 
