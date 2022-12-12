@@ -7,25 +7,14 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends build-essential curl libpq-dev \
   && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
   && apt-get clean
-#  && apt-get clean \
-#  && useradd --create-home ruby \
-#  && chown ruby:ruby -R /app
 
-#USER ruby
-
-COPY --chown=app:app Gemfile* ./
+COPY --chown=app:app Gemfile* .
 RUN bundle install --jobs "$(nproc)"
-
-#COPY --chown=app:app package.json *yarn* ./
-#RUN yarn install
 
 ARG RAILS_ENV="production"
 ENV RAILS_ENV="${RAILS_ENV}"
-#ENV RAILS_ENV="${RAILS_ENV}" \
-#    PATH="${PATH}:/home/ruby/.local/bin" \
-#    USER="ruby"
 
-COPY --chown=app:app . .
+# COPY --chown=app:app . .
 
 RUN if [ "${RAILS_ENV}" != "development" ]; then \
   SECRET_KEY_BASE=dummyvalue bundle exec rails assets:precompile; fi
@@ -39,8 +28,8 @@ LABEL maintainer="Bryan Borgeson <bryborge@gmail.com>"
 
 WORKDIR /app
 
-# Copy --chown=app:app over bundler build files and app code
-COPY --chown=app:app --from=builder /usr/local/rvm/ /usr/local/rvm/
+# Copy over bundler build files and app code.
+COPY --from=builder /usr/local/rvm/ /usr/local/rvm/
 
 # Nginx and Passenger are disabled by default. Enable them.
 RUN rm -f /etc/service/nginx/down && \
@@ -50,20 +39,12 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends build-essential curl libpq-dev \
   && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
   && apt-get clean
-#  && apt-get clean \
-#  && useradd --create-home ruby \
-#  && chown ruby:ruby -R /app
-
-#USER ruby
 
 COPY --chown=app:app bin/ ./bin
 RUN chmod 0755 bin/*
 
 ARG RAILS_ENV="production"
 ENV RAILS_ENV="${RAILS_ENV}"
-#ENV RAILS_ENV="${RAILS_ENV}" \
-#    PATH="${PATH}:/home/ruby/.local/bin" \
-#    USER="ruby"
 
 #COPY --chown=app:app --from=assets /usr/local/bundle /usr/local/bundle
 #COPY --chown=app:app --from=assets /app/public /public
