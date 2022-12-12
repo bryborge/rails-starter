@@ -74,7 +74,7 @@ These instructions will walk you through the process of setting up this project 
 7.  We're now ready to spin it all up.
 
     ```sh
-    docker-compose up -d
+    docker compose up -d
     ```
 
 8.  In a browser, navigate to `localhost:<PORT>`, where `<PORT>` is the port number specified in your `.env` file.

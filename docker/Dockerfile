@@ -13,10 +13,10 @@ RUN apt-get update \
 
 #USER ruby
 
-COPY Gemfile* ./
+COPY --chown=app:app Gemfile* ./
 RUN bundle install --jobs "$(nproc)"
 
-#COPY package.json *yarn* ./
+#COPY --chown=app:app package.json *yarn* ./
 #RUN yarn install
 
 ARG RAILS_ENV="production"
@@ -25,7 +25,7 @@ ENV RAILS_ENV="${RAILS_ENV}"
 #    PATH="${PATH}:/home/ruby/.local/bin" \
 #    USER="ruby"
 
-COPY . .
+COPY --chown=app:app . .
 
 RUN if [ "${RAILS_ENV}" != "development" ]; then \
   SECRET_KEY_BASE=dummyvalue bundle exec rails assets:precompile; fi
@@ -39,8 +39,8 @@ LABEL maintainer="Bryan Borgeson <bryborge@gmail.com>"
 
 WORKDIR /app
 
-# Copy over bundler build files and app code
-COPY --from=builder /usr/local/rvm/ /usr/local/rvm/
+# Copy --chown=app:app over bundler build files and app code
+COPY --chown=app:app --from=builder /usr/local/rvm/ /usr/local/rvm/
 
 # Nginx and Passenger are disabled by default. Enable them.
 RUN rm -f /etc/service/nginx/down && \
@@ -56,7 +56,7 @@ RUN apt-get update \
 
 #USER ruby
 
-COPY bin/ ./bin
+COPY --chown=app:app bin/ ./bin
 RUN chmod 0755 bin/*
 
 ARG RAILS_ENV="production"
@@ -65,10 +65,10 @@ ENV RAILS_ENV="${RAILS_ENV}"
 #    PATH="${PATH}:/home/ruby/.local/bin" \
 #    USER="ruby"
 
-#COPY --from=assets /usr/local/bundle /usr/local/bundle
-#COPY --from=assets /app/public /public
-COPY ./docker/nginx.conf /etc/nginx/sites-enabled/nginx.conf
-COPY . .
+#COPY --chown=app:app --from=assets /usr/local/bundle /usr/local/bundle
+#COPY --chown=app:app --from=assets /app/public /public
+COPY --chown=app:app ./docker/nginx.conf /etc/nginx/sites-enabled/nginx.conf
+COPY --chown=app:app . .
 
 # init script that performs better handling of the init process in a container context.
 #   Link: https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/
