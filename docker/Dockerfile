@@ -11,9 +11,6 @@ RUN apt-get update \
 COPY --chown=app:app Gemfile* .
 RUN bundle install --jobs "$(nproc)"
 
-ARG RAILS_ENV="production"
-ENV RAILS_ENV="${RAILS_ENV}"
-
 RUN if [ "${RAILS_ENV}" != "development" ]; then \
   SECRET_KEY_BASE=dummyvalue bundle exec rails assets:precompile; fi
 
@@ -37,9 +34,6 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends build-essential curl libpq-dev \
   && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
   && apt-get clean
-
-ARG RAILS_ENV="production"
-ENV RAILS_ENV="${RAILS_ENV}"
 
 COPY ./docker/nginx.conf /etc/nginx/sites-enabled/nginx.conf
 COPY --chown=app:app . .
