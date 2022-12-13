@@ -11,9 +11,6 @@ RUN apt-get update \
 COPY --chown=app:app Gemfile* .
 RUN bundle install --jobs "$(nproc)"
 
-RUN if [ "${RAILS_ENV}" != "development" ]; then \
-  SECRET_KEY_BASE=dummyvalue bundle exec rails assets:precompile; fi
-
 CMD ["bash"]
 
 ################################################################################
@@ -35,8 +32,11 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
   && apt-get clean
 
-COPY ./docker/nginx.conf /etc/nginx/sites-enabled/nginx.conf
 COPY --chown=app:app . .
+
+# Configuration bootstrapping.
+RUN mkdir -p /etc/my_init.d
+COPY ./docker/init.sh /etc/my_init.d/init.sh
 
 # init script that performs better handling of the init process in a container context.
 #   Link: https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/

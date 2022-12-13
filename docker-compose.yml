@@ -8,12 +8,12 @@ services:
     container_name: ${PROJECT_NAME}_web
     depends_on:
       - db
-    entrypoint: bundle exec rails s -b 0.0.0.0
     env_file: .env
     environment:
       DB_HOST: db
       DB_USERNAME: postgres
       DB_PASSWORD: password
+      LOCAL: 'true'
       PASSENGER_APP_ENV: development
       TZ: America/Los_Angeles
     image: ${PROJECT_NAME}:rubyland
