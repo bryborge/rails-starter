@@ -7,14 +7,14 @@ default: &default
 
 development:
   <<: *default
-  database: <%= ENV["PROJECT_NAME"] %>_development
+  database: <%= ENV["APP_NAME"] %>_development
   username: postgres
   password: password
   host: db
 
 test:
   <<: *default
-  database: <%= ENV["PROJECT_NAME"] %>_test
+  database: <%= ENV["APP_NAME"] %>_test
   username: postgres
   password: password
   host: db
@@ -41,6 +41,6 @@ test:
 #
 production:
   <<: *default
-  database: current_production
+  database: <%= ENV["APP_NAME"] %>_production
   username: current
   password: <%= ENV["CURRENT_DATABASE_PASSWORD"] %>

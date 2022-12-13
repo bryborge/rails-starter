@@ -47,7 +47,7 @@ These instructions will walk you through the process of setting up this project 
     For example:
 
     ```sh
-    rails new . --database=postgresql --skip-test --skip-puma
+    rails new . --database=postgresql --skip-test
     ```
 
     When prompted to overwrite files, select `a` to continue. Once this completes, you can exit the container.
@@ -56,10 +56,10 @@ These instructions will walk you through the process of setting up this project 
     exit
     ```
 
-5.  Create a `.env` file and set the `PROJECT_NAME` variable to the name of the project root directory.
+5.  Create a `.env` file and set the `APP_NAME` variable to the name of the project root directory.
 
     ```sh
-    echo "PROJECT_NAME=${PWD##*/}" >> .env.dist && cp .env{.dist,}
+    echo "APP_NAME=${PWD##*/}" >> .env.dist && cp .env{.dist,}
     ```
 
 6.  We're now ready to spin it all up.

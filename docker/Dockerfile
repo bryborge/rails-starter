@@ -34,11 +34,15 @@ RUN apt-get update \
 
 COPY --chown=app:app . .
 
-# Configuration bootstrapping.
-RUN mkdir -p /etc/my_init.d
-COPY ./docker/scripts/init.sh /etc/my_init.d/init.sh
+# Configure Nginx.
+RUN cp ./docker/nginx/00_app_env.conf /etc/nginx/conf.d/00_app_env.conf
+RUN cp ./docker/nginx/nginx.conf /etc/nginx/sites-enabled/nginx.conf
 
-# init script that performs better handling of the init process in a container context.
+# Configure container environment.
+RUN mkdir -p /etc/my_init.d
+COPY ./docker/init.sh /etc/my_init.d/init.sh
+
+# Better handling of the init process in a container context.
 #   Link: https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/
 ENTRYPOINT ["/sbin/my_init"]
 
