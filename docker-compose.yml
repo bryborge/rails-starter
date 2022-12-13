@@ -10,34 +10,29 @@ services:
       - db
     env_file: .env
     environment:
-      DB_HOST: db
-      DB_USERNAME: postgres
-      DB_PASSWORD: password
       LOCAL: 'true'
-      PASSENGER_APP_ENV: development
+      PASSENGER_APP_ENV: ${ENVIRONMENT}
       TZ: America/Los_Angeles
     image: ${PROJECT_NAME}:rubyland
     links:
       - db
     platform: linux/amd64
     ports:
-      - "${HOST_PORT}:3000"
+      - "${HOST_APP_PORT}:80"
     restart: unless-stopped
     volumes:
       - .:/app
 
   db:
     container_name: ${PROJECT_NAME}_db
+    env_file: .env
     environment:
       POSTGRES_DB: ${PROJECT_NAME}_development
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     image: postgres:12.10
     ports:
-      - target: 5432
-        published: 5432
-        protocol: tcp
-        mode: host
+      - "${HOST_DB_PORT}:5432"
     restart: unless-stopped
     volumes:
       - db_data:/var/lib/postgresql/data

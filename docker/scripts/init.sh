@@ -20,14 +20,14 @@ setup_local() {
 
   # Copy configs from dist and populate from ENV
   if test -f $HOME/config/database.yml; then
-    echo "Removing existing ${file}"
+    echo "Removing existing database.yml"
     rm $HOME/config/database.yml
   fi
 
   echo "Creating new database.yml from .dist"
   envsubst < $HOME/config/database.yml.dist > $HOME/config/database.yml
 
-  echo "Creating new database.yml from .dist"
+  echo "Enabling nginx configuration"
   envsubst < $HOME/docker/nginx.conf > /etc/nginx/sites-enabled/nginx.conf
 }
 
@@ -102,7 +102,7 @@ setup_local() {
 # main
 if [ "${LOCAL}" = true ]; then
   setup_local
-  $HOME/docker/local/provision-dbs.sh
+  $HOME/docker/scripts/provision-dbs.sh
 # else
 #   setup_ecs
 fi

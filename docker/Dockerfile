@@ -28,7 +28,7 @@ RUN rm -f /etc/service/nginx/down && \
     rm /etc/nginx/sites-enabled/default
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends build-essential curl libpq-dev \
+  && apt-get install -y --no-install-recommends build-essential curl gettext libpq-dev \
   && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
   && apt-get clean
 
@@ -36,7 +36,7 @@ COPY --chown=app:app . .
 
 # Configuration bootstrapping.
 RUN mkdir -p /etc/my_init.d
-COPY ./docker/init.sh /etc/my_init.d/init.sh
+COPY ./docker/scripts/init.sh /etc/my_init.d/init.sh
 
 # init script that performs better handling of the init process in a container context.
 #   Link: https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/
