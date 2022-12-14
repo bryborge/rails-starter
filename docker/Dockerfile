@@ -1,3 +1,6 @@
+# Base Image
+#   - Repo: https://hub.docker.com/r/phusion/passenger-ruby31
+#   - Docs: https://github.com/phusion/passenger-docker
 FROM phusion/passenger-ruby31 as builder
 LABEL maintainer="Bryan Borgeson <bryborge@gmail.com>"
 
