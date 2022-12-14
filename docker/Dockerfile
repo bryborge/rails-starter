@@ -46,7 +46,7 @@ RUN mkdir -p /etc/my_init.d
 COPY ./docker/bootstrap.sh /etc/my_init.d/bootstrap.sh
 
 # Better handling of the init process in a container context.
-#   Link: https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/
+#   - Article: https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/
 ENTRYPOINT ["/sbin/my_init"]
 
 EXPOSE 80
