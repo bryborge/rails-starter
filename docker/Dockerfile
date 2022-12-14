@@ -35,8 +35,8 @@ RUN apt-get update \
 COPY --chown=app:app . .
 
 # Configure Nginx.
-RUN cp ./docker/nginx/00_app_env.conf /etc/nginx/conf.d/00_app_env.conf
-RUN cp ./docker/nginx/nginx.conf /etc/nginx/sites-enabled/nginx.conf
+COPY ./docker/nginx/00_app_env.conf /etc/nginx/conf.d/00_app_env.conf
+COPY ./docker/nginx/app.conf /etc/nginx/sites-enabled/app.conf
 
 # Configure container environment.
 RUN mkdir -p /etc/my_init.d

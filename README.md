@@ -32,7 +32,7 @@ These instructions will walk you through the process of setting up this project 
     `docker/Dockerfile`.
 
     ```sh
-    docker run --rm -v ${PWD}:/app -w /app -it ruby:<version> /bin/bash
+    docker run --rm -v ${PWD}:/app -w /app -it ruby:3.1.2 /bin/bash
     ```
 
 3.  From within the container, install rails.
