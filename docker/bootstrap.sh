@@ -44,6 +44,7 @@ case $PASSENGER_APP_ENV in
     provision_local_dbs
     ;;
 
+  # TODO: add 'production' instructions.
   # production)
   #   ;;
 

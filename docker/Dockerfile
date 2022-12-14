@@ -23,10 +23,10 @@ LABEL maintainer="Bryan Borgeson <bryborge@gmail.com>"
 
 WORKDIR /app
 
-# Copy over bundler build files and app code.
+# Copy over bundler build files.
 COPY --chown=app:app --from=builder /usr/local/rvm/ /usr/local/rvm/
 
-# Nginx and Passenger are disabled by default. Enable them.
+# Enable Nginx and Passenger.
 RUN rm -f /etc/service/nginx/down && \
     rm /etc/nginx/sites-enabled/default
 
@@ -41,9 +41,9 @@ COPY --chown=app:app . .
 COPY ./docker/nginx/00_app_env.conf /etc/nginx/conf.d/00_app_env.conf
 COPY ./docker/nginx/app.conf /etc/nginx/sites-enabled/app.conf
 
-# Configure container environment.
+# Bootstrap application for given environment.
 RUN mkdir -p /etc/my_init.d
-COPY ./docker/init.sh /etc/my_init.d/init.sh
+COPY ./docker/bootstrap.sh /etc/my_init.d/bootstrap.sh
 
 # Better handling of the init process in a container context.
 #   Link: https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/
