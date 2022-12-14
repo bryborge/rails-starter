@@ -1,1 +1,7 @@
+.idea
+.vscode
+coverage
+log/*
+tmp/*
+.DS_Store
 .env
