@@ -1,7 +1,7 @@
 RAILS_ENV ?= development
 RUN := run --rm
 DOCKER_COMPOSE_RUN := docker compose $(RUN)
-DOCKER_RUN := docker compose $(RUN)
+DOCKER_RUN := docker $(RUN)
 
 default: compose-test
 
@@ -10,6 +10,7 @@ init:
 		-v ${PWD}:/app \
 		-w /app -it ruby:3.1.2 \
 		/bin/bash -c "gem install rails; rails new . --database=postgresql --skip-test --force"
+	@echo "APP_NAME=${PWD##*/}" >> .env.dist && cp .env{.dist,}
 
 # test:
 # 	bundle exec rspec ${T}
