@@ -32,22 +32,17 @@ These instructions will walk you through the process of setting up this project 
     `docker/Dockerfile`.
 
     ```sh
-    make init
+    make init-project
     ```
 
-3.  Create a `.env` file and set the `APP_NAME` variable to the name of the project root directory.
+3.  We're now ready to spin it all up.
 
     ```sh
-    echo "APP_NAME=${PWD##*/}" >> .env.dist && cp .env{.dist,}
+    make up
     ```
 
-4.  We're now ready to spin it all up.
-
-    ```sh
-    docker compose up -d
-    ```
-
-5.  In a browser, navigate to `localhost:<PORT>`, where `<PORT>` is the port number specified in your `.env` file.
+4.  In a browser, navigate to `localhost:<HOST_APP_PORT>`, where `<HOST_APP_PORT>` is the port number specified in your
+    `.env` file.
 
 ## License
 
