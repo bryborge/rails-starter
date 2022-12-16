@@ -6,9 +6,9 @@ default: bash
 # PROJECT INITIALIZATION #######################################################
 
 init:
-	docker run --rm \
+	docker run --rm -it \
 		-v ${PWD}:/app \
-		-w /app -it ruby:${RUBY_VERSION} \
+		-w /app ruby:${RUBY_VERSION} \
 		/bin/bash -c "gem install rails; rails new . --database=postgresql --skip-test --force"
 	@printf "APP_NAME=%s" `basename ${PWD}` >> .env.dist
 	@cp .env{.dist,}
@@ -33,7 +33,7 @@ bash:
 	docker compose exec -e "RAILS_ENV=${RAILS_ENV}" web bash
 
 console:
-	docker compose exec -e "RAILS_ENV=${RAILS_ENV}" web bundle exec rails c
+	docker compose exec -e "RAILS_ENV=${RAILS_ENV}" web bundle exec rails console
 
 dbconsole:
 	docker compose exec -e "RAILS_ENV=${RAILS_ENV}" web bundle exec rails dbconsole
