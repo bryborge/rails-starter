@@ -23,19 +23,19 @@ services:
     volumes:
       - .:/app
 
-  db:
+  postgres:
     container_name: ${APP_NAME}_db
     env_file: .env
     environment:
       POSTGRES_DB: ${APP_NAME}_development
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-    image: postgres:12.10
+    image: postgres:15.1
     ports:
       - "${HOST_DB_PORT}:5432"
     restart: unless-stopped
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  db_data:
+  postgres_data:
