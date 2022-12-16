@@ -32,43 +32,17 @@ These instructions will walk you through the process of setting up this project 
     `docker/Dockerfile`.
 
     ```sh
-    docker run --rm -v ${PWD}:/app -w /app -it ruby:3.1.2 /bin/bash
+    make init
     ```
 
-3.  From within the container, install rails.
+3.  We're now ready to spin it all up.
 
     ```sh
-    gem install rails
+    make up
     ```
 
-4.  Still inside the container, generate your new rails application using whatever
-    [flags](https://guides.rubyonrails.org/command_line.html#rails-new) you wish to pass.
-
-    For example:
-
-    ```sh
-    rails new . --database=postgresql --skip-test
-    ```
-
-    When prompted to overwrite files, select `a` to continue. Once this completes, you can exit the container.
-
-    ```sh
-    exit
-    ```
-
-5.  Create a `.env` file and set the `APP_NAME` variable to the name of the project root directory.
-
-    ```sh
-    echo "APP_NAME=${PWD##*/}" >> .env.dist && cp .env{.dist,}
-    ```
-
-6.  We're now ready to spin it all up.
-
-    ```sh
-    docker compose up -d
-    ```
-
-7.  In a browser, navigate to `localhost:<PORT>`, where `<PORT>` is the port number specified in your `.env` file.
+4.  In a browser, navigate to `localhost:<HOST_APP_PORT>`, where `<HOST_APP_PORT>` is the port number specified in your
+    `.env` file (defaults to `3000`).
 
 ## License
 
