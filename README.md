@@ -32,7 +32,7 @@ These instructions will walk you through the process of setting up this project 
     `docker/Dockerfile`.
 
     ```sh
-    make init-project
+    make init
     ```
 
 3.  We're now ready to spin it all up.
@@ -42,7 +42,7 @@ These instructions will walk you through the process of setting up this project 
     ```
 
 4.  In a browser, navigate to `localhost:<HOST_APP_PORT>`, where `<HOST_APP_PORT>` is the port number specified in your
-    `.env` file.
+    `.env` file (defaults to `3000`).
 
 ## License
 

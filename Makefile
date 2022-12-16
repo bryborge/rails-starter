@@ -40,11 +40,8 @@ dbconsole:
 
 # RAILS COMMANDS ###############################################################
 
-bundle:
- 	docker compose exec -e "RAILS_ENV=${RAILS_ENV}" web bundle ${CMD}
-
 test:
-	docker compose exec -e "RAILS_ENV=test" web bundle exec rspec ${T}
+	docker compose exec -e "RAILS_ENV=test" web bundle exec rspec
 
 ################################################################################
 
