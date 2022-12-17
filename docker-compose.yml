@@ -7,7 +7,7 @@ services:
       dockerfile: docker/Dockerfile
     container_name: ${APP_NAME}_web
     depends_on:
-      - db
+      - postgres
     env_file: .env
     environment:
       LOCAL: 'true'
@@ -15,7 +15,7 @@ services:
       TZ: America/Los_Angeles
     image: ${APP_NAME}:rubyland
     links:
-      - db
+      - postgres
     platform: linux/amd64
     ports:
       - "${HOST_APP_PORT}:80"
