@@ -1,7 +1,7 @@
 # Base Image
-#   - Repo: https://hub.docker.com/r/phusion/passenger-ruby31
+#   - Repo: https://hub.docker.com/r/phusion/passenger-ruby32
 #   - Docs: https://github.com/phusion/passenger-docker
-FROM phusion/passenger-ruby31 as builder
+FROM phusion/passenger-ruby32 as builder
 LABEL maintainer="Bryan Borgeson <bryborge@gmail.com>"
 
 WORKDIR /app
@@ -18,7 +18,7 @@ CMD ["bash"]
 
 ################################################################################
 
-FROM phusion/passenger-ruby31 as runner
+FROM phusion/passenger-ruby32 as runner
 LABEL maintainer="Bryan Borgeson <bryborge@gmail.com>"
 
 WORKDIR /app
