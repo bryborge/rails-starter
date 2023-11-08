@@ -23,7 +23,7 @@ These instructions will walk you through the process of setting up this project 
     reinitialize git.
 
     ```sh
-    git clone --depth=1 git@github.com:sonofborge/rails-starter.git <my-project> \
+    git clone --depth=1 git@github.com:bryborge/rails-starter.git <my-project> \
     && cd $_ \
     && rm -rf .git
     ```
